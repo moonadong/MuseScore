@@ -1467,6 +1467,9 @@ void TextObj::read()
 {
     BasicRectObj::read();
     unsigned size = cap->readUnsigned();
+    if(size + 1 == 0){
+       throw Capella::Error::BAD_FORMAT;
+    }
 #if (!defined (_MSCVER) && !defined (_MSC_VER))
     char txt[size + 1];
 #else
