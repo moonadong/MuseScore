@@ -2149,6 +2149,9 @@ int Capella::readInt()
 char* Capella::readString()
 {
     unsigned len = readUnsigned();
+    if(len + 1 == 0){
+       throw Capella::Error::BAD_FORMAT;
+    }    
     char* buffer = new char[static_cast<size_t>(len) + 1];
     read(buffer, len);
     buffer[len] = 0;
@@ -2306,7 +2309,7 @@ void Capella::readStaveLayout(CapStaffLayout* sl, int idx)
     if (sl->bSoundMapIn) {        // Umleitungstabelle für Eingabe vom Keyboard
         uchar iMin = readByte();
         uchar n    = readByte();
-        IF_ASSERT_FAILED(n > 0 && iMin + n <= 128) {
+        if(n > 0 && iMin + n <= 128) {
             throw Capella::Error::BAD_FORMAT;
         }
         f->read(sl->soundMapIn, n);
@@ -2315,7 +2318,7 @@ void Capella::readStaveLayout(CapStaffLayout* sl, int idx)
     if (sl->bSoundMapOut) {       // Umleitungstabelle für das Vorspielen
         unsigned char iMin = readByte();
         unsigned char n    = readByte();
-        IF_ASSERT_FAILED(n > 0 && iMin + n <= 128) {
+        if(n > 0 && iMin + n <= 128) {
             throw Capella::Error::BAD_FORMAT;
         }
         f->read(sl->soundMapOut, n);
