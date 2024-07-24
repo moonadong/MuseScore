@@ -1467,7 +1467,7 @@ void TextObj::read()
 {
     BasicRectObj::read();
     unsigned size = cap->readUnsigned();
-    if(size + 1 == 0){
+    if (size + 1 == 0) {
        throw Capella::Error::BAD_FORMAT;
     }
 #if (!defined (_MSCVER) && !defined (_MSC_VER))
@@ -2312,7 +2312,7 @@ void Capella::readStaveLayout(CapStaffLayout* sl, int idx)
     if (sl->bSoundMapIn) {        // Umleitungstabelle für Eingabe vom Keyboard
         uchar iMin = readByte();
         uchar n    = readByte();
-        if(n > 0 && iMin + n <= 128) {
+        if (n > 0 && iMin + n <= 128) {
             throw Capella::Error::BAD_FORMAT;
         }
         f->read(sl->soundMapIn, n);
@@ -2321,7 +2321,7 @@ void Capella::readStaveLayout(CapStaffLayout* sl, int idx)
     if (sl->bSoundMapOut) {       // Umleitungstabelle für das Vorspielen
         unsigned char iMin = readByte();
         unsigned char n    = readByte();
-        if(n > 0 && iMin + n <= 128) {
+        if (n > 0 && iMin + n <= 128) {
             throw Capella::Error::BAD_FORMAT;
         }
         f->read(sl->soundMapOut, n);
